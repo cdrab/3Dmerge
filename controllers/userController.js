@@ -523,7 +523,7 @@ const nbrUser = async (req, res) => {
     ],
   });
 
-  const userVisitByMonth = contByMonth(userVisit)
+  const userVisitByMonth = contByMonth(userVisit, "month")
 
   res.json({ countUserByYear, countByMonthByYear, userVisitByMonth });
   console.log(countUserByYear)

@@ -1,8 +1,8 @@
-const contByMonth = (countUserByYear) => {
+const contByMonth = (countUserByYear, Byattribut) => {
   const userCountsByMonth = {};
 
   countUserByYear.forEach((user) => {
-    const attribut = user.getDataValue("month");
+    const attribut = user.getDataValue(Byattribut);
 
     const key = `${attribut}`;
     if (userCountsByMonth[key]) {
@@ -17,17 +17,14 @@ const contByMonth = (countUserByYear) => {
 
   for (const key in userCountsByMonth) {
     if (userCountsByMonth.hasOwnProperty(key)) {
-    //   var entry = {};
-    //   if (Byattribut == "month") {
-    //     entry = { month: key, count: userCountsByMonth[key] };
-    //   }else if (Byattribut == "pageId") {
-    //     entry = {}
-    //   }
+      var entry = {};
+      if (Byattribut == "month") {
+        entry = { month: key, count: userCountsByMonth[key] };
+      }else if (Byattribut == "pageId") {
+        entry = {page: key, count: userCountsByMonth[key]}
+      }
 
-      userCountsArray.push({
-        month: key,
-        count: userCountsByMonth[key],
-      });
+      userCountsArray.push(entry);
     }
   }
 
