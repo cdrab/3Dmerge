@@ -119,7 +119,7 @@ const getTopProduct = async (req, res) => {
       "productId",
       [sequelize.fn("COUNT", sequelize.col("productId")), "count"],
     ],
-    group: ["productId", "year"],
+    group: ["productId"],
     order: [[sequelize.fn("COUNT", sequelize.col("productId")), "DESC"]],
     limit: 5,
   });

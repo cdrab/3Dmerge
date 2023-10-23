@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 const sequelize = require("sequelize");
 const { Op } = require("sequelize");
+const contByMonth = require("../utils/countByMonth");
 
 var date = new Date();
 var day = date.getDate();
@@ -463,7 +464,7 @@ const avatarUpdateUser = async (req, res) => {
 const nbrUser = async (req, res) => {
   const { year } = await req.body;
 
-  console.log(year)
+  console.log(year);
 
   const countUser = await users.findAll({
     where: {
@@ -479,70 +480,52 @@ const nbrUser = async (req, res) => {
     return result.dataValues.year == year;
   });
 
-  countUserByYear.userCount = countUserByYear.lenght + 1
+  countUserByYear.userCount = countUserByYear.lenght + 1;
 
   const userCountsByMonth = {};
 
-countUserByYear.forEach((user) => {
-  const month = user.getDataValue('month');
+  countUserByYear.forEach((user) => {
+    const month = user.getDataValue("month");
 
-  const key = `${month}`;
-  if (userCountsByMonth[key]) {
-    userCountsByMonth[key]++;
-  } else {
-    userCountsByMonth[key] = 1;
+    const key = `${month}`;
+    if (userCountsByMonth[key]) {
+      userCountsByMonth[key]++;
+    } else {
+      userCountsByMonth[key] = 1;
+    }
+  });
+
+  // Étape 3 : Générez un tableau d'objets avec les résultats.
+  const userCountsArray = [];
+
+  for (const key in userCountsByMonth) {
+    if (userCountsByMonth.hasOwnProperty(key)) {
+      userCountsArray.push({
+        month: key,
+        count: userCountsByMonth[key],
+      });
+    }
   }
-});
 
-// Étape 3 : Générez un tableau d'objets avec les résultats.
-const userCountsArray = [];
+  // Triez le tableau par mois (facultatif)
+  userCountsArray.sort((a, b) => {
+    return a.month - b.month;
+  });
 
-for (const key in userCountsByMonth) {
-  if (userCountsByMonth.hasOwnProperty(key)) {
-    userCountsArray.push({
-      month: key,
-      count: userCountsByMonth[key],
-    });
-  }
-}
+  console.log(userCountsArray);
 
-// Triez le tableau par mois (facultatif)
-userCountsArray.sort((a, b) => {
-  return a.month - b.month;
-});
+  const countByMonthByYear = userCountsArray;
 
-console.log(userCountsArray)
-
-const countByMonthByYear = userCountsArray
-
-  // const countUserByMonth = await users.findAll({
-  //   where: {
-  //     role: process.env.PRIME3,
-  //   },
-  //   attributes: [
-  //     [sequelize.literal("MONTH(createdAt)"), "month"],
-  //     [sequelize.literal("YEAR(createdAt)"), "year"],
-  //     [sequelize.fn("COUNT", sequelize.col("ID_user")), "count"],
-  //   ],
-  //   group: ["month"],
-  //   order: sequelize.literal("month"),
-  // });
-
-  // const countByMonthByYear = countUserByMonth.filter((result) => {
-  //   return result.dataValues.year == year;
-  // });
-
-  const userVisitByMonth = await sessions.findAll({
+  const userVisit = await sessions.findAll({
     where: {
       year: year,
     },
     attributes: [
       "month",
-      [sequelize.fn("COUNT", sequelize.col("userId")), "count"],
     ],
-    group: ["month"],
-    order: ["month"],
   });
+
+  const userVisitByMonth = contByMonth(userVisit)
 
   res.json({ countUserByYear, countByMonthByYear, userVisitByMonth });
 };

@@ -31,3 +31,5 @@ const contByMonth = (countUserByYear)=>{
 
  return userCountsArray
 }
+
+module.exports = contByMonth
