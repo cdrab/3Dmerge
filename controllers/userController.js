@@ -471,13 +471,14 @@ const nbrUser = async (req, res) => {
     },
     attributes: [
       [sequelize.literal("YEAR(createdAt)"), "year"],
-      [sequelize.fn("COUNT", sequelize.col("ID_user")), "userCount"],
     ],
   });
 
   const countUserByYear = countUser.filter((result) => {
     return result.dataValues.year == year;
   });
+
+  countUserByYear.userCount = countUserByYear.lenght + 1
 
   const countUserByMonth = await users.findAll({
     where: {
