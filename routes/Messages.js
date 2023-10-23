@@ -13,7 +13,7 @@ const {
   getMessageNotif,
 } = require("../controllers/messageController");
 
-const imgPath = path.join(__dirname, "..", "public", "img");
+const imgPath = path.join(__dirname, "..", "public", "dist", "img");
 
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {

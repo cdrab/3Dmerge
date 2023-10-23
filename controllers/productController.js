@@ -57,12 +57,12 @@ const uploadProductImage = async (req, res) => {
 
   if (req?.files?.png) {
     if (req.files.png[0].mimetype.split("/")[0] == "image") {
-      png = `${process.env.SERVER_PATH}/img/png/${req.files.png[0].filename}`;
+      png = `/img/png/${req.files.png[0].filename}`;
     }
   }
   if (req?.files?.pub) {
     if (req.files.pub[0].mimetype.split("/")[0] == "image") {
-      pub = `${process.env.SERVER_PATH}/img/pub/${req.files.pub[0].filename}`;
+      pub = `/img/pub/${req.files.pub[0].filename}`;
     }
   }
   if (req?.files?.gallery) {
@@ -72,7 +72,7 @@ const uploadProductImage = async (req, res) => {
       console.log(file.mimetype.split("/")[0] == "image");
       if (file.mimetype.split("/")[0] == "image") {
         galleryArray.push(
-          `${process.env.SERVER_PATH}/img/gallery/${file.filename}`
+          `/img/gallery/${file.filename}`
         );
       }
     });

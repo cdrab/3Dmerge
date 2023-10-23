@@ -8,7 +8,7 @@ const addMessage = async (req, res) => {
   let img, message;
   if (req?.files?.file) {
     if (req.files.file[0].mimetype.split("/")[0] == "image") {
-      img = `${process.env.SERVER_PATH}/img/file/${req.files.file[0].filename}`;
+      img = `/img/file/${req.files.file[0].filename}`;
     }
   }
 

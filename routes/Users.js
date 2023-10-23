@@ -23,7 +23,7 @@ const verifyRole = require("../middlewares/verifyRole");
 const multer = require("multer");
 const path = require("path");
 
-const imgPath = path.join(__dirname, "..", "public", "img");
+const imgPath = path.join(__dirname, "..", "public", "dist", "img");
 
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {

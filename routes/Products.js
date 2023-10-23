@@ -13,7 +13,7 @@ const multer = require("multer");
 const verifyJWT = require("../middlewares/verifyJWT");
 const verifyRole = require("../middlewares/verifyRole");
 
-const imgPath = path.join(__dirname, "..", "public", "img");
+const imgPath = path.join(__dirname, "..", "public", "dist", "img");
 
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {

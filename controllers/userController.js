@@ -310,7 +310,7 @@ const uploadUserImage = async (req, res) => {
 
   if (req?.files?.avatar) {
     if (req.files.avatar[0].mimetype.split("/")[0] == "image") {
-      avatar = `${process.env.SERVER_PATH}/img/avatar/${req.files.avatar[0].filename}`;
+      avatar = `/img/avatar/${req.files.avatar[0].filename}`;
     }
   }
 
