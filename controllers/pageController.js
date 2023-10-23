@@ -61,12 +61,12 @@ const uploadPageImage = async (req, res) => {
 
   if (req?.files?.icon) {
     if (req.files.icon[0].mimetype.split("/")[0] == "image") {
-      icon = `${process.env.SERVER_PATH}/img/icon/${req.files.icon[0].filename}`;
+      icon = `/img/icon/${req.files.icon[0].filename}`;
     }
   }
   if (req?.files?.home) {
     if (req.files.home[0].mimetype.split("/")[0] == "image") {
-      home = `${process.env.SERVER_PATH}/img/home/${req.files.home[0].filename}`;
+      home = `/img/home/${req.files.home[0].filename}`;
     }
   }
 
