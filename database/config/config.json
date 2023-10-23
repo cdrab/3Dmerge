@@ -1,0 +1,37 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "register",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "dialectOptions": {
+      "dateStrings": true,
+      "typeCast": true,
+      "timezone": "+03:00"
+    },
+    "timezone": "+03:00"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "register",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "dialectOptions": {
+      "dateStrings": true,
+      "typeCast": true,
+      "timezone": "+03:00"
+    },
+    "timezone": "+03:00"
+  },
+  "production": {
+    "use_env_variable":"DATABASE_URL",
+    "username": "root",
+    "password": "3p2XxYohcGkZcoUv5zcx",
+    "database": "railway",
+    "host": "containers-us-west-138.railway.app",
+    "dialect": "mysql",
+    "port": "7134"
+  }
+}
