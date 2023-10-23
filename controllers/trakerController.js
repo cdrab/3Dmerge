@@ -159,7 +159,7 @@ const nbrProdByTrack = async (req, res) => {
           year: year,
         },
         attributes: [
-          [sequelize.fn("COUNT", sequelize.col("ProductId")), "Cacount"],
+          [sequelize.fn("COUNT", sequelize.col("pageId")), "Cacount"],
         ],
       },
       {

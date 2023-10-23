@@ -476,11 +476,13 @@ const nbrUser = async (req, res) => {
     ],
   });
 
-  const countUserByYear = countUser.filter((result) => {
+  const UserByYear = countUser.filter((result) => {
     return result.dataValues.year == year;
   });
 
-  countUserByYear.userCount = countUserByYear.lenght + 1;
+  const countUserByYear = {
+    userCount : UserByYear.lenght + 1
+  }
 
   const userCountsByMonth = {};
 

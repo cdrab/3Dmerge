@@ -1,10 +1,10 @@
-const contByMonth = (countUserByYear)=>{
-    const userCountsByMonth = {};
+const contByMonth = (countUserByYear) => {
+  const userCountsByMonth = {};
 
   countUserByYear.forEach((user) => {
-    const month = user.getDataValue("month");
+    const attribut = user.getDataValue("month");
 
-    const key = `${month}`;
+    const key = `${attribut}`;
     if (userCountsByMonth[key]) {
       userCountsByMonth[key]++;
     } else {
@@ -17,6 +17,13 @@ const contByMonth = (countUserByYear)=>{
 
   for (const key in userCountsByMonth) {
     if (userCountsByMonth.hasOwnProperty(key)) {
+    //   var entry = {};
+    //   if (Byattribut == "month") {
+    //     entry = { month: key, count: userCountsByMonth[key] };
+    //   }else if (Byattribut == "pageId") {
+    //     entry = {}
+    //   }
+
       userCountsArray.push({
         month: key,
         count: userCountsByMonth[key],
@@ -29,7 +36,7 @@ const contByMonth = (countUserByYear)=>{
     return a.month - b.month;
   });
 
- return userCountsArray
-}
+  return userCountsArray;
+};
 
-module.exports = contByMonth
+module.exports = contByMonth;
