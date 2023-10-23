@@ -177,7 +177,7 @@ const getMessageNotif = async (req, res) => {
       "sender",
       "receiver",
       "createdAt",
-      [Sequelize.fn("COUNT", Sequelize.col("ID_message")), "count"],
+      [Sequelize.fn("COUNT", Sequelize.col("sender")), "count"],
     ],
     include: [
       {
