@@ -464,8 +464,6 @@ const avatarUpdateUser = async (req, res) => {
 const nbrUser = async (req, res) => {
   const { year } = await req.body;
 
-  console.log(year);
-
   const countUser = await users.findAll({
     where: {
       role: process.env.PRIME3,
@@ -481,12 +479,12 @@ const nbrUser = async (req, res) => {
   });
 
   const countUserByYear = {
-    userCount : UserByYear.lenght + 1
+    userCount : UserByYear.length + 1
   }
 
   const userCountsByMonth = {};
 
-  countUserByYear.forEach((user) => {
+  UserByYear.forEach((user) => {
     const month = user.getDataValue("month");
 
     const key = `${month}`;
@@ -514,8 +512,6 @@ const nbrUser = async (req, res) => {
     return a.month - b.month;
   });
 
-  console.log(userCountsArray);
-
   const countByMonthByYear = userCountsArray;
 
   const userVisit = await sessions.findAll({
@@ -530,6 +526,7 @@ const nbrUser = async (req, res) => {
   const userVisitByMonth = contByMonth(userVisit)
 
   res.json({ countUserByYear, countByMonthByYear, userVisitByMonth });
+  console.log(countUserByYear)
 };
 
 module.exports = {
