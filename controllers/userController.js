@@ -471,6 +471,7 @@ const nbrUser = async (req, res) => {
     },
     attributes: [
       [sequelize.literal("YEAR(createdAt)"), "year"],
+      [sequelize.literal("MONTH(createdAt)"), "month"],
     ],
   });
 
@@ -480,22 +481,56 @@ const nbrUser = async (req, res) => {
 
   countUserByYear.userCount = countUserByYear.lenght + 1
 
-  const countUserByMonth = await users.findAll({
-    where: {
-      role: process.env.PRIME3,
-    },
-    attributes: [
-      [sequelize.literal("MONTH(createdAt)"), "month"],
-      [sequelize.literal("YEAR(createdAt)"), "year"],
-      [sequelize.fn("COUNT", sequelize.col("ID_user")), "count"],
-    ],
-    group: ["month"],
-    order: sequelize.literal("month"),
-  });
+  const userCountsByMonth = {};
 
-  const countByMonthByYear = countUserByMonth.filter((result) => {
-    return result.dataValues.year == year;
-  });
+countUserByYear.forEach((user) => {
+  const month = user.getDataValue('month');
+
+  const key = `${month}`;
+  if (userCountsByMonth[key]) {
+    userCountsByMonth[key]++;
+  } else {
+    userCountsByMonth[key] = 1;
+  }
+});
+
+// Étape 3 : Générez un tableau d'objets avec les résultats.
+const userCountsArray = [];
+
+for (const key in userCountsByMonth) {
+  if (userCountsByMonth.hasOwnProperty(key)) {
+    userCountsArray.push({
+      month: key,
+      count: userCountsByMonth[key],
+    });
+  }
+}
+
+// Triez le tableau par mois (facultatif)
+userCountsArray.sort((a, b) => {
+  return a.month - b.month;
+});
+
+console.log(userCountsArray)
+
+const countByMonthByYear = userCountsArray
+
+  // const countUserByMonth = await users.findAll({
+  //   where: {
+  //     role: process.env.PRIME3,
+  //   },
+  //   attributes: [
+  //     [sequelize.literal("MONTH(createdAt)"), "month"],
+  //     [sequelize.literal("YEAR(createdAt)"), "year"],
+  //     [sequelize.fn("COUNT", sequelize.col("ID_user")), "count"],
+  //   ],
+  //   group: ["month"],
+  //   order: sequelize.literal("month"),
+  // });
+
+  // const countByMonthByYear = countUserByMonth.filter((result) => {
+  //   return result.dataValues.year == year;
+  // });
 
   const userVisitByMonth = await sessions.findAll({
     where: {
