@@ -461,14 +461,17 @@ const avatarUpdateUser = async (req, res) => {
 };
 
 const nbrUser = async (req, res) => {
-  const { year } = req.body;
+  const { year } = await req.body;
 
-  const countUser = await users.count({
+  console.log(year)
+
+  const countUser = await users.findAll({
     where: {
       role: process.env.PRIME3,
     },
     attributes: [
       [sequelize.literal("YEAR(createdAt)"), "year"],
+      [sequelize.fn("COUNT", sequelize.col("ID_user")), "userCount"],
     ],
   });
 
