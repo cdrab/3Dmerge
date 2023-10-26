@@ -65,7 +65,8 @@ db.sequelize.sync().then(() => {
   });
 });
 
-app.use(express.static("./public/dist"));
+app.use(express.static("./public/dist/"));
+
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
