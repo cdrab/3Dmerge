@@ -140,23 +140,23 @@ app.use(
   })
 );
 
-const refreshRoutes = require("/routes/Refresh.js");
+const refreshRoutes = require("./routes/Refresh.js");
 app.use("/refresh", refreshRoutes);
 
-const userRoutes = require("/routes/Users.js");
+const userRoutes = require("./routes/Users.js");
 app.use("/auth", userRoutes);
 
-const trakerRoutes = require("/routes/Trakers.js");
+const trakerRoutes = require("./routes/Trakers.js");
 app.use("/traker", trakerRoutes);
 
-const pageRoutes = require("/routes/Pages.js");
+const pageRoutes = require("./routes/Pages.js");
 app.use("/page", pageRoutes);
 
-const productRoutes = require("/routes/Products.js");
+const productRoutes = require("./routes/Products.js");
 app.use("/product", productRoutes);
 
-const logRoutes = require("/routes/Logs.js");
+const logRoutes = require("./routes/Logs.js");
 app.use("/log", logRoutes);
 
-const messageRoutes = require("/routes/Messages.js");
+const messageRoutes = require("./routes/Messages.js");
 app.use("/message", messageRoutes);
