@@ -1,8 +1,8 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
-const db = require("/database/models");
-const { users, products, pages, sessions } = require("/database/models");
+const db = require("./database/models");
+const { users, products, pages, sessions } = require("./database/models");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { Server } = require("socket.io");
