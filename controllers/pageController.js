@@ -13,14 +13,14 @@ const addPage = async (req, res) => {
     if (addPage) return res.json("Page existe déjà");
 
   if (
-    !page ||
-    !position ||
-    !minXAngle ||
-    !minYAngle ||
-    !maxXAngle ||
-    !maxYAngle 
+    /^[A-Za-z]+$/.test(page) ||
+    /^(-?\d+(\.\d+)?,-?\d+(\.\d+)?,-?\d+(\.\d+)?)$/.test(position) ||
+    /^-?\d+(\.\d+)?$/.test(minXAngle) ||
+    /^-?\d+(\.\d+)?$/.test(minYAngle)  ||
+    /^-?\d+(\.\d+)?$/.test(maxXAngle)  ||
+    /^-?\d+(\.\d+)?$/.test(maxYAngle) 
   ) {
-    return res.json("Aucun ne doit être vide");
+    return res.sendStatus(401)
   }
 
   const result = await pages.create({

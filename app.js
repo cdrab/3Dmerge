@@ -54,7 +54,7 @@ io.on("connection", (socket) => {
   });
 });
 
-pages.hasMany(products, { onDelete: "CASCADE", foreignKey: "pageId" });
+
 products.belongsTo(pages, { onDelete: "CASCADE", foreignKey: "pageId" });
 users.hasOne(sessions, { foreignKey: "userId" });
 sessions.belongsTo(users, { foreignKey: "userId" });
