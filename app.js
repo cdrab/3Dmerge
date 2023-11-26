@@ -121,7 +121,7 @@ db.sequelize.sync({force:true}).then(async() => {
   (23, '/avatar/woman-business.png', 'cedi', 'cedi@gmail.com', 1212121212, '$2b$10$QBAT6gu8aPqAfHJnBZMI2O1nJQMhbXzBGb8NZMPIf.szcPAvxy5RW', '', 4215, 'Particulier', '2023-10-10 11:06:11', '2023-10-13 08:56:34'),
   (24, '/avatar/woman-business.png', 'Clo', 'clo@gmail.com', 2147483647, '$2b$10$oEluVKD5IyhxZeUhu93U5.JKdwYgvBBgIJHbhFhpkUX6vFppJBbHq', '', 4215, 'Particulier', '2023-10-13 08:15:06', '2023-10-13 08:39:36');
   `)
-  await db.sequelize.query(`mysql > SET PERSIST sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))`)
+  // await db.sequelize.query(`mysql > SET PERSIST sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))`)
   server.listen(process.env.PORT, "0.0.0.0",() => {
     console.log(`http://127.0.0.1:${process.env.PORT}`);
   });
