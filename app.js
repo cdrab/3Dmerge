@@ -61,7 +61,7 @@ users.hasOne(sessions, { foreignKey: "userId" });
 sessions.belongsTo(users, { foreignKey: "userId" });
 
 db.sequelize.sync().then(async() => {
-  await Sequelize.query(`mysql > SET PERSIST sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))`)
+  await db.sequelize.query(`SET PERSIST sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))`)
   server.listen(process.env.PORT, "0.0.0.0",() => {
     console.log(`http://127.0.0.1:${process.env.PORT}`);
   });
