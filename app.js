@@ -8,7 +8,6 @@ const bodyParser = require("body-parser");
 const { Server } = require("socket.io");
 const http = require("http");
 const path = require("path")
-const Sequelize = require("sequelize")
 
 const app = express();
 
@@ -67,7 +66,7 @@ db.sequelize.sync().then(async() => {
   });
 });
 
-app.use(express.static("./public/dist/"));
+app.use(express.static("public/dist/"));
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
@@ -100,3 +99,7 @@ app.use("/log", logRoutes);
 
 const messageRoutes = require("./routes/Messages.js");
 app.use("/message", messageRoutes);
+
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "public", "dist", "index.html"));
+});
